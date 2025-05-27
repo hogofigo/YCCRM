@@ -54,3 +54,20 @@ def logout():
 if __name__ == "__main__":
     init_db()
     app.run(debug=True)
+    import sqlite3
+
+def init_db():
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username TEXT NOT NULL,
+            password TEXT NOT NULL
+        )
+    ''')
+    conn.commit()
+    conn.close()
+
+# تأكد أن هذا السطر يتم تنفيذه عند بدء التطبيق
+init_db()
