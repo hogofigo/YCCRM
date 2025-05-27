@@ -1,3 +1,24 @@
+import sqlite3
+
+def init_db():
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username TEXT NOT NULL,
+            password TEXT NOT NULL
+        )
+    ''')
+    # يمكنك هنا إدخال مستخدم افتراضي
+    cursor.execute("SELECT * FROM users WHERE username = 'admin'")
+    if not cursor.fetchone():
+        cursor.execute("INSERT INTO users (username, password) VALUES (?, ?)", ('admin', 'admin'))
+    conn.commit()
+    conn.close()
+
+init_db()  # هذا السطر يجب أن يُنفذ عند بداية تشغيل التطبيق
+
 from flask import Flask, render_template, request, redirect, url_for, session
 import sqlite3
 import os
