@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head><title>Dashboard</title></head>
+<body>
+  <h2>Dashboard</h2>
+  <a href="/logout">Logout</a>
+  <h3>Risks by Category</h3>
+  <ul>
+    {% for cat, count in category_data %}
+    <li>{{ cat }}: {{ count }}</li>
+    {% endfor %}
+  </ul>
+  <h3>Risks by Department</h3>
+  <ul>
+    {% for dept, count in dept_data %}
+    <li>{{ dept }}: {{ count }}</li>
+    {% endfor %}
+  </ul>
+  <h3>Risks by Rating</h3>
+  <ul>
+    {% for rate, count in rating_data %}
+    <li>{{ rate }}: {{ count }}</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
